@@ -32,3 +32,7 @@ crash.delay = 30
 
 ## Have fun troubleshooting!
 
+### Developer Credits
+
+Antonin Houska
+
