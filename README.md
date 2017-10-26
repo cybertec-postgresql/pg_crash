@@ -2,6 +2,8 @@
 
 A Postgres extension to send kill (or other) signal after some interval. Useful for testing HA failover scenarios.
 
+Works with Postges 10.0.
+
 # Installation
 
 * Build the extension
