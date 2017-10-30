@@ -34,6 +34,6 @@ crash.delay = 30
 
 ### Developer Credits
 
-Antonin Houska, Cybertec Schönig & Schönig GmbH
+Antonin Houska, Cybertec Schönig & Schönig GmbH.
 Visit our website: [www.postgresql-support.de](http://www.postgresql-support.de)
 
