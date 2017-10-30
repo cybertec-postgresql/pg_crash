@@ -1,6 +1,9 @@
 # pg\_crash
 
-A Postgres extension to send kill (or other) signal after some interval. Useful for testing HA failover scenarios.
+If your database is too reliable - pg\_crash can kill it for you. pg\_crash is
+an extension to PostgreSQL, which allows you to periodically or randomly crash
+your database infrastructure by sending kill (or other) signals to your DB
+processes and make them fail. It is ideal for HA and failover testing.
 
 Works with Postges 10.0.
 
@@ -12,7 +15,7 @@ Works with Postges 10.0.
 PG_CONFIG=/usr/local/pgsql/bin/pg_config make
 sudo PG_CONFIG=/usr/local/pgsql/bin/pg_config make install
 ```
-NB! Replace /usr/local/pgsql/bin with your wished binary
+NB! Replace /usr/local/pgsql/bin with your desired binary
 
 * Edit server config
 
