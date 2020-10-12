@@ -5,7 +5,7 @@ an extension to PostgreSQL, which allows you to periodically or randomly crash
 your database infrastructure by sending kill (or other) signals to your DB
 processes and make them fail. It is ideal for HA and failover testing.
 
-Works with Postgres 10.0.
+Works with Postgres >= 10.0.
 
 # Installation
 
@@ -37,6 +37,6 @@ crash.delay = 30
 
 ### Developer Credits
 
-Antonin Houska, Cybertec Schönig & Schönig GmbH.
+Antonin Houska, Cybertec PostgreSQL International GmbH.
 Visit our website: [www.cybertec-postgresql.com](https://www.cybertec-postgresql.com)
 
