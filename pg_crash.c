@@ -47,6 +47,7 @@ _PG_init(void)
 	worker.bgw_flags = BGWORKER_SHMEM_ACCESS;
 	worker.bgw_start_time = BgWorkerStart_RecoveryFinished;
 	worker.bgw_restart_time = 0;
+	sprintf(worker.bgw_type, "crash worker");
 	sprintf(worker.bgw_name, "crash worker");
 	sprintf(worker.bgw_library_name, "pg_crash");
 	sprintf(worker.bgw_function_name, "crash_worker_main");
@@ -105,7 +106,10 @@ crash_worker_main(Datum main_arg)
 			{
 				Size	len = c - start;
 				char	*str = pnstrdup(start, len);
-				long int		nr = strtol(str, NULL, 10);
+				long int		nr;
+
+				errno = 0;
+				nr = strtol(str, NULL, 10);
 
 				if (errno != 0)
 					ereport(ERROR,
@@ -126,11 +130,26 @@ crash_worker_main(Datum main_arg)
 			ereport(ERROR, (errmsg("no signals specified")));
 	}
 
+	ereport(LOG,
+			(errmsg("pg_crash background worker started, crash.delay = %d, crash.signals = '%s'",
+					signal_delay, crash_signals)));
+
 	for (;;)
 	{
 		int	i, j;
 		int	rc;
 		int	signal;
+
+		/* wait for signal_delay seconds */
+		ResetLatch(MyLatch);
+
+		rc = WaitLatch(MyLatch, WL_LATCH_SET | WL_POSTMASTER_DEATH |
+					   WL_TIMEOUT, signal_delay * 1000L, 0);
+		if (rc & WL_POSTMASTER_DEATH)
+			break;
+
+		if (got_sigterm)
+			break;
 
 		/* Select signal. */
 		n = random() % list_length(signals);
@@ -160,18 +179,6 @@ crash_worker_main(Datum main_arg)
 				}
 				j++;
 			}
-
 		}
-
-		rc = WaitLatch(MyLatch, WL_LATCH_SET | WL_POSTMASTER_DEATH |
-					   WL_TIMEOUT, signal_delay * 1000L, 0);
-		if (rc & WL_POSTMASTER_DEATH)
-			break;
-
-		if (got_sigterm)
-			break;
-
-		ResetLatch(MyLatch);
 	}
-
 }
