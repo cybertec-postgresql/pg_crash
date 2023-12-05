@@ -13,7 +13,7 @@
 PG_MODULE_MAGIC;
 
 extern void _PG_init(void);
-extern void crash_worker_main(Datum main_arg);
+PGDLLEXPORT extern void crash_worker_main(Datum main_arg);
 
 static int	signal_delay;
 char		*crash_signals;
