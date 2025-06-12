@@ -16,8 +16,8 @@ extern void _PG_init(void);
 PGDLLEXPORT extern void crash_worker_main(Datum main_arg);
 
 static int	signal_delay;
-char		*crash_signals;
-static	List	*signals = NIL;
+static char *crash_signals;
+static List *signals = NIL;
 
 void
 _PG_init(void)
@@ -72,7 +72,6 @@ crash_worker_sigterm(SIGNAL_ARGS)
 void
 crash_worker_main(Datum main_arg)
 {
-	long int	n;
 	uint32	nprocs = MaxBackends + NUM_AUXILIARY_PROCS + max_prepared_xacts;
 	PGPROC	*procs = ProcGlobal->allProcs;
 
@@ -136,6 +135,7 @@ crash_worker_main(Datum main_arg)
 
 	for (;;)
 	{
+		long int	n;
 		int	i, j;
 		int	rc;
 		int	signal;

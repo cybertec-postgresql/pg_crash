@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with pgxs
+
+override_dh_pgxs_test:
+	debian/tests/crash . . postgresql-%v-pg-crash
+
+override_dh_installdocs:
+	dh_installdocs --all README.*

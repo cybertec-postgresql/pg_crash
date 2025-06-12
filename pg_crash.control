@@ -1,5 +1,0 @@
-# pg_crash extension
-comment = 'Send random signals to random processes.'
-default_version = '1.0'
-module_pathname = '$libdir/pg_crash'
-relocatable = true

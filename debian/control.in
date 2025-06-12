@@ -1,0 +1,28 @@
+Source: pg-crash
+Section: database
+Priority: optional
+Maintainer: Debian PostgreSQL Maintainers <team+postgresql@tracker.debian.org>
+Uploaders:
+ Christoph Berg <myon@debian.org>,
+Build-Depends:
+ architecture-is-64-bit <!pkg.postgresql.32-bit>,
+ debhelper-compat (= 13),
+ postgresql-all <!nocheck>,
+ postgresql-server-dev-all (>= 217~),
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+Homepage: https://github.com/cybertec-postgresql/pg_crash
+Vcs-Browser: https://salsa.debian.org/postgresql/pg-crash
+Vcs-Git: https://salsa.debian.org/postgresql/pg-crash.git
+
+Package: postgresql-PGVERSION-pg-crash
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${postgresql:Depends},
+ ${shlibs:Depends},
+Description: Periodically crash your PostgreSQL database
+ If your database is too reliable - pg_crash can kill it for you. pg_crash is
+ an extension to PostgreSQL that periodically crashes your database
+ infrastructure by sending kill (or other) signals to your DB processes and
+ make them fail. It is ideal for HA and failover testing.

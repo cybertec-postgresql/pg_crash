@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+export LC_ALL=C.UTF-8
+
+echo "psql -Xc 'SELECT pg_sleep(600)' 2>&1 | grep 'FATAL:  terminating connection due to administrator command'" | \
+pg_buildext \
+	-o "shared_preload_libraries=pg_crash" \
+	-o "superuser_reserved_connections=0" \
+	-o "max_wal_senders=0" \
+	-o "max_connections=1" \
+	virtualenv "$@"
