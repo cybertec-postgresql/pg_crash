@@ -37,7 +37,7 @@ _PG_init(void)
 	DefineCustomStringVariable(
 		"crash.signals",
 		"A list of signals to choose from.",
-		"Random signal is chosen out of the ones contained in the set.",
+		"Random signal is chosen out of the ones contained in the set (space-separated).",
 		&crash_signals,
 		"15",
 		PGC_POSTMASTER,
@@ -152,11 +152,11 @@ crash_worker_main(Datum main_arg)
 			break;
 
 		/* Select signal. */
-		n = random() % list_length(signals);
+		n = rand() % list_length(signals);
 		signal = list_nth_int(signals, n);
 
 		/* Select backend. */
-		n = random() % nprocs;
+		n = rand() % nprocs;
 		j = 0;
 		for (i = 0;; i++)
 		{
