@@ -4,7 +4,7 @@
 
 Summary:	Periodically crash your PostgreSQL database
 Name:		%{sname}_%{pgmajorversion}
-Version:	0.2
+Version:	0.3
 Release:	1PGDG%{?dist}
 License:	PostgreSQL
 Source0:	https://github.com/cybertec-postgresql/%{sname}/archive/refs/tags/v%{version}.tar.gz
