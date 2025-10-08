@@ -1,3 +1,11 @@
+pg-crash (0.3-2) unstable; urgency=medium
+
+  * Upload for PostgreSQL 18. (Closes: #1117274)
+  * Add ${postgresql:Breaks}.
+  * Fix Vcs-Git, repo is on github.
+
+ -- Christoph Berg <myon@debian.org>  Wed, 08 Oct 2025 16:02:20 +0200
+
 pg-crash (0.3-1) unstable; urgency=medium
 
   * New upstream version.

@@ -1,5 +1,7 @@
 Depends:
  postgresql-common-dev,
  @,
-Tests: crash
-Restrictions: allow-stderr
+Tests:
+ crash,
+Restrictions:
+ allow-stderr,
